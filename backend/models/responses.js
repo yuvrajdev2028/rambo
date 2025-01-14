@@ -16,9 +16,9 @@ const responseSchema = mongoose.Schema({
     responseMessage:{
         type:String,
         required:true,
-    },
+    }
 },{timestamps:true})
 
-const Response = mongoose.model('Response',responseSchema)
+const Response = mongoose.model('Response',responseSchema);
 
 module.exports = Response;
