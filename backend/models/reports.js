@@ -1,15 +1,15 @@
 const mongoose=require('mongoose');
-const { default: User } = require('./users');
+const User = require('./users');
 
 const reportSchema = new mongoose.Schema({
     volunteerId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:User,
+        ref:'User',
         required:true,
     },
     ngoId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:User,
+        ref:'User',
         required:true,
     },
     title:{
@@ -30,6 +30,7 @@ const reportSchema = new mongoose.Schema({
     status:{
         type:String,
         enum:['pending','in progress','resolved'],
+        default:'pending'
     },
 }, {timestamps:true})
 

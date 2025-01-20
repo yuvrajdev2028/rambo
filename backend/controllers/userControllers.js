@@ -9,7 +9,7 @@ exports.signup = async(req,res)=>{
         if(!hashedPassword){
             throw new Error('password cannot be hashed');
         }
-        const newUser = new User({ name, email, hashedPassword, role});
+        const newUser = new User({ name, email, password:hashedPassword, role});
         await newUser.save();
         return res.status(201).json({
             message: 'Signup successfull.'
@@ -17,6 +17,7 @@ exports.signup = async(req,res)=>{
     }
     catch(error){
         return res.status(500).json({
+            error: `${error}`,
             message: 'Error occured while signing up.',
         })
     }
@@ -52,7 +53,7 @@ exports.login = async(req,res)=>{
     }
 }
 
-exports.logout = ()=>{
+exports.logout = (req,res)=>{
     try{
         res.clearCookie('token',{
             httpOnly: true,
