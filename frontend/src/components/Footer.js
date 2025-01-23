@@ -8,7 +8,7 @@ const Footer = () => {
     <div className='p-8 flex justify-between border-t-4 border-t-green-600'>
         <div>
             <img className='w-[180px] h-[60px]' src={logo}></img>
-            <p className='text-green-600 font-thin text-xs w-[180px]'>Save Dogs. Save Society</p>
+            <p className='text-green-600 font-thin text-xs w-[180px] text-center'>Connecting Compassion.</p>
         </div>
         <div>
             <h3 className='font-semibold text-lg mb-4'>Quick Links</h3>

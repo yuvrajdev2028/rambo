@@ -8,8 +8,9 @@ import About from './pages/About';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
-import RecentPosts from './pages/RecentPosts';
+// import RecentPosts from './pages/RecentPosts';
 import Footer from './components/Footer';
+import NotFound from './pages/NotFound';
 
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<Signup/>} />
-        <Route path='/recentposts' element={<RecentPosts/>} />
+        {/* <Route path='/recentposts' element={<RecentPosts/>} /> */}
+        <Route path='*' element={<NotFound/>} />
       </Routes>
       <Footer/>
     </div>

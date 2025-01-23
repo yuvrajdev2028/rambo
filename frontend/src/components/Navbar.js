@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className='flex gap-3 text-green-600 items-center'>
             <Link to='/'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'>Home</div></Link>
             <Link to='/about'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'>About</div></Link>
-            <Link to='/recentposts'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'>Recent Posts</div></Link>
+            {/* <Link to='/recentposts'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'>Recent Posts</div></Link> */}
             <Link to='/community'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'> Community</div></Link>
         </div>
         <div className='flex gap-2 items-center'>
