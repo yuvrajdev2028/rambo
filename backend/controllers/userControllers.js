@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 exports.signup = async(req,res)=>{
     try{
+        console.log("in signup-backend")
         const { name, email, password, role } = req.body;
         const hashedPassword = await hashPassword(password);
         if(!hashedPassword){
@@ -16,6 +17,7 @@ exports.signup = async(req,res)=>{
         })
     }
     catch(error){
+        console.log(error);
         return res.status(500).json({
             error: `${error}`,
             message: 'Error occured while signing up.',
