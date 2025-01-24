@@ -2,7 +2,7 @@ import React from 'react'
 import logo from '../assets/rambo-high-resolution-logo-transparent.png'
 import { Link } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({isLoggedin}) => {
   return (
     <div className='py-2 px-8 border-b-4 border-b-green-600 flex justify-between bg-white'>
         <Link to='/'><img className='w-[120px] h-[40px]' src={logo} alt='Logo of Rambo with a vector of a dog and text Rambo written beside it.'/></Link>
@@ -12,10 +12,17 @@ const Navbar = () => {
             {/* <Link to='/recentposts'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'>Recent Posts</div></Link> */}
             <Link to='/community'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'> Community</div></Link>
         </div>
-        <div className='flex gap-2 items-center'>
+        {isLoggedin?(
+          <div>
+            <Link to='/dashboard'><button className='border-4 border-green-600 text-green-600 rounded-2xl px-3 hover:text-white hover:bg-green-600 transition-all'>Dashboard</button></Link>
+          </div>):(
+          <div className='flex gap-2 items-center'>
             <Link to='/login'><button className='border-4 border-green-600 text-green-600 rounded-2xl px-3 hover:text-white hover:bg-green-600 transition-all'>LogIn</button></Link>
             <Link to='/signup'><button className='border-4 border-green-600 text-green-600 rounded-2xl px-3 hover:text-white hover:bg-green-600 transition-all'>SignUp</button></Link>
-        </div>
+          </div>
+          )
+        }
+        
     </div>
   )
 }

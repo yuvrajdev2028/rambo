@@ -11,19 +11,22 @@ import Dashboard from './pages/Dashboard';
 // import RecentPosts from './pages/RecentPosts';
 import Footer from './components/Footer';
 import NotFound from './pages/NotFound';
+import { useState } from 'react';
 
 
 function App() {
+  const [isLoggedin,setIsLoggedIn]=useState(false);
+
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar isLoggedin={isLoggedin}/>
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/about' element={<About/>} />
         <Route path='/community' element={<Community/>} />
-        <Route path='/dashboard' element={<Dashboard/>} />
-        <Route path='/login' element={<Login/>} />
-        <Route path='/signup' element={<Signup/>} />
+        <Route path='/dashboard' element={isLoggedin?(<Dashboard/>):(<NotFound/>)} />
+        <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
+        <Route path='/signup' element={<Signup setIsLoggedIn={setIsLoggedIn}/>} />
         {/* <Route path='/recentposts' element={<RecentPosts/>} /> */}
         <Route path='*' element={<NotFound/>} />
       </Routes>
