@@ -1,6 +1,7 @@
 const User = require('../models/users');
 const { hashPassword, comparePassword } = require('../utils/hashUtils');
 const jwt = require('jsonwebtoken');
+const { generateAccessToken, generateRefreshToken } = require('../utils/tokenUtils');
 
 exports.signup = async(req,res)=>{
     try{
@@ -35,16 +36,36 @@ exports.login = async(req,res)=>{
                 message: 'Invalid Email or Password',
             })
         }
-        const token = jwt.sign({
-            userId: user._id,
-            role: user.role,
-        }, process.env.JWT_SECRET, {expiresIn: '1d'});
-        res.cookie('token',token,{
-            expires: new Date(Date.now()+24*60*60*1000),
-            httpOnly: true
+        // Generate Access Token
+        const accessToken = generateAccessToken({userId: user._id,role: user.role});
+        
+        // const accessToken = jwt.sign({
+        //     userId: user._id,
+        //     role: user.role,
+        // }, process.env.JWT_SECRET, {expiresIn: '15m'});
+
+        // Generate Refresh Token
+        const refreshToken = generateRefreshToken({userId: user._id,role: user.role});
+
+        // const refreshToken=jwt.sign({
+        //     userId: user._id,
+        //     role: user.role
+        // }, process.env.REFRESH_SECRET, {expiresIn: '30d'})
+
+        if(!accessToken || !refreshToken){
+            throw new Error("Error occured while generating tokens.")
+        }
+
+        //Set refresh token as a httponly cookie
+        res.cookie('refreshToken',refreshToken,{
+            // expires: new Date(Date.now()+24*60*60*1000),
+            httpOnly: true,
+            secure: true,
+            sameSite: 'Strict'
             })
             .status(200)
-            .json({
+            .json({ // Send Access Token in response body
+            accessToken: accessToken,
             message: 'Log In Successful.'
         })
     }
@@ -59,6 +80,8 @@ exports.logout = (req,res)=>{
     try{
         res.clearCookie('token',{
             httpOnly: true,
+            secure: true,
+            sameSite: 'Strict'
         });
         return res.status(200).json({
             message: 'Logged Out Successfully!',
@@ -67,6 +90,37 @@ exports.logout = (req,res)=>{
     catch(error){
         return res.status(500).json({
             message: 'Logout Failed!',
+        })
+    }
+}
+
+exports.refresh = (req,res)=>{
+    try{
+        const refreshToken = req.cookies.refreshToken;
+
+        if(!refreshToken){
+            return res.status(401).json({
+                message: 'Token not found. Login again.'
+            })
+        }
+        
+        try{
+            const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+            const newAccessToken = generateAccessToken(decoded.userId,decoded.role);
+            res.status(200).json({
+                token:newAccessToken,
+                message:'New token generated.'
+            })
+        }
+        catch(error){
+            res.status(401).json({
+                message:'Invalid Refresh Token.'
+            })
+        }
+    }
+    catch(error){
+        return res.status(500).json({
+            message: 'Token Refresh Failed.'
         })
     }
 }
