@@ -38,19 +38,9 @@ exports.login = async(req,res)=>{
         }
         // Generate Access Token
         const accessToken = generateAccessToken({userId: user._id,role: user.role});
-        
-        // const accessToken = jwt.sign({
-        //     userId: user._id,
-        //     role: user.role,
-        // }, process.env.JWT_SECRET, {expiresIn: '15m'});
 
         // Generate Refresh Token
         const refreshToken = generateRefreshToken({userId: user._id,role: user.role});
-
-        // const refreshToken=jwt.sign({
-        //     userId: user._id,
-        //     role: user.role
-        // }, process.env.REFRESH_SECRET, {expiresIn: '30d'})
 
         if(!accessToken || !refreshToken){
             throw new Error("Error occured while generating tokens.")
@@ -58,7 +48,6 @@ exports.login = async(req,res)=>{
 
         //Set refresh token as a httponly cookie
         res.cookie('refreshToken',refreshToken,{
-            // expires: new Date(Date.now()+24*60*60*1000),
             httpOnly: true,
             secure: true,
             sameSite: 'Strict'
@@ -108,7 +97,7 @@ exports.refresh = (req,res)=>{
             const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
             const newAccessToken = generateAccessToken(decoded.userId,decoded.role);
             res.status(200).json({
-                token:newAccessToken,
+                accessToken:newAccessToken,
                 message:'New token generated.'
             })
         }
