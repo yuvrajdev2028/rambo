@@ -1,4 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
@@ -8,6 +10,7 @@ export const AuthProvider = ({children})=>{
 
     const [accessToken, setAccessToken] = useState(null);
     const [user,setUser]=useState(null);
+    const navigate = useNavigate();
 
     const login = async(email, password)=>{
         try{
@@ -29,7 +32,9 @@ export const AuthProvider = ({children})=>{
                 const data = await response.json();
                 console.log('Data: ',data);
                 setAccessToken(data.accessToken);
-                setUser({id: data.userId, role: data.role})
+                const decode = jwtDecode(data.accessToken)
+                setUser({id: decode.userId, role: decode.role});
+                navigate('/dashboard')
             }
             else{
                 throw new Error("Login failed")
@@ -89,6 +94,7 @@ export const AuthProvider = ({children})=>{
     useEffect(()=>{
         const restoreSession = async()=>{
             try{
+                console.log('restoring session')
                 const res = await fetch(`${apiUrl}/refresh`,{
                     method: 'POST',
                     credentials: 'include'
@@ -100,6 +106,9 @@ export const AuthProvider = ({children})=>{
 
                 const data = await res.json();
                 setAccessToken(data.accessToken);
+                const decode = jwtDecode(data.accessToken);
+                setUser({id: decode.userId, role: decode.role});
+                console.log('session restored successfully');
             }
             catch(error){
                 console.log(error);
