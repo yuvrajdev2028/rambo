@@ -1,13 +1,11 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle} from '@fortawesome/free-brands-svg-icons'
-import { useNavigate } from 'react-router-dom';
+import AuthContext from '../contexts/AuthContext';
 
+const LoginForm = () => {
+  const { login } = useContext(AuthContext);
 
-const apiUrl = process.env.REACT_APP_BASE_URL;
-
-const LoginForm = ({setIsLoggedIn}) => {
-  const navigate = useNavigate();
   const [formData,setFormData] = useState({
       email:"",
       password:""
@@ -23,29 +21,9 @@ const LoginForm = ({setIsLoggedIn}) => {
   
     const submitHandler = async(event)=>{
       event.preventDefault();
-      try{
-        // console.log(`entry sent is: ${entry}`);
-        console.log(formData)
-        const request=new Request(`${apiUrl}/login`,{
-          method:"POST",
-          headers:{
-            'Content-Type':'application/json'
-          },
-          body:JSON.stringify(formData),
-        });
-        console.log(`req.body sent is: ${request.body}`);
-        const response=await fetch(request);
-        console.log(response);
-        if(response.status===200){
-          setIsLoggedIn(true);
-          navigate('/dashboard');
-        }
-      }
-      catch(error)
-      {
-        console.log('Errors Occured!!!')
-        console.log(error);
-      }
+      
+      await login(formData.email, formData.password);
+
       setFormData({
         email:'',
         password:''
