@@ -95,7 +95,7 @@ exports.refresh = (req,res)=>{
         
         try{
             const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
-            const newAccessToken = generateAccessToken(decoded.userId,decoded.role);
+            const newAccessToken = generateAccessToken({userId: decoded.userId, role: decoded.role});
             res.status(200).json({
                 accessToken:newAccessToken,
                 message:'New token generated.'
