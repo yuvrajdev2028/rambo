@@ -4,7 +4,7 @@ import { faGoogle} from '@fortawesome/free-brands-svg-icons'
 import { useNavigate } from 'react-router-dom';
 const apiUrl=process.env.REACT_APP_BASE_URL;
 
-const SignupForm = ({setIsLoggedIn}) => {
+const SignupForm = () => {
   const navigate=useNavigate();
   const [formData,setFormData] = useState({
     email:"",
@@ -24,7 +24,6 @@ const SignupForm = ({setIsLoggedIn}) => {
   const submitHandler = async(event)=>{
     event.preventDefault();
     try{
-      // console.log(`entry sent is: ${entry}`);
       console.log(formData)
       const request=new Request(`${apiUrl}/signup`,{
         method:"POST",
@@ -37,8 +36,7 @@ const SignupForm = ({setIsLoggedIn}) => {
       const response=await fetch(request);
       console.log(response);
       if(response.status===201){
-        setIsLoggedIn(true);
-        navigate('/dashboard')
+        navigate('/login')
       }
     }
     catch(error)
