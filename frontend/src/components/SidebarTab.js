@@ -1,16 +1,13 @@
 import React from 'react'
 
-const SidebarTab = ({label}) => {
+const SidebarTab = ({label,tab,setTab}) => {
   return (
-    // <div>
-    //     {isActive?(<div className='p-2 bg-green-600'>
-    //     {label}
-    // </div>):(<div className='p-2 border-2 border-green-600'>
-    //     {label}
-    // </div>)}
-    // </div>
-    <div className='p-2 border-2 border-green-600'>
+    <div>
+      {(label===tab) ? <div className='p-2 text-white mx-2 my-1 rounded-md bg-green-600'>
         {label}
+    </div> : <div className='p-2 text-green-600 hover:bg-green-100 mx-2 my-1 rounded-md' onClick={()=>{setTab(label)}}>
+        {label}
+    </div>}
     </div>
   )
 }
