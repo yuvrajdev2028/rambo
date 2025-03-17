@@ -10,7 +10,7 @@ const SignupForm = () => {
     email:"",
     name:"",
     password:"",
-    role:"ngo"
+    role:"volunteer"
   });
 
   const changeHandler = (event)=>{
@@ -49,7 +49,7 @@ const SignupForm = () => {
       email:"",
       name:"",
       password:"",
-      role:"ngo"
+      role:"volunteer"
     })
     const selectRole = document.querySelector('#role');
     selectRole.selectedIndex=0;
@@ -65,9 +65,16 @@ const SignupForm = () => {
         <input type='password' name='password' id='password' value={formData.password} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Password' required></input>
         <label htmlFor='role' className='text-left text-sm font-semibold mt-2'>ROLE</label>
         <select name='role' id='role' form='signup-form' onClick={changeHandler} className='bg-[#EFF0F2] p-2'>
+          <option value='volunteer' selected>Volunteer</option>
           <option value='ngo'>NGO</option>
-          <option value='volunteer'>Volunteer</option>
         </select>
+        {(formData.role === 'ngo') ? <div className='flex flex-col'>
+          <label htmlFor='location' className='text-left text-sm font-semibold mt-2'>LOCATION</label>
+          <input type='text' name='location' id='location' value={formData.location} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Location' required></input>
+          <label htmlFor='about' className='text-left text-sm font-semibold mt-2'>ABOUT</label>
+          <textarea name='about' id='about' value={formData.about} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='About' required />
+          </div>
+          : (<></>)}
         <button type='submit' className='bg-green-700 w-36 p-2 text-white mx-auto rounded-3xl my-5 hover:bg-green-600 transition-all'>SignUp</button>
         <div className='flex items-center justify-between mb-10 mt-5'>
           <div className='h-[2px] bg-[#EFF0F2] w-[45%]'></div>
