@@ -6,12 +6,12 @@ import AuthContext from '../contexts/AuthContext'
 const Navbar = () => {
   const { user,logout } = useContext(AuthContext)
   return (
-    <div className='py-2 px-8 border-b-4 border-b-green-600 flex justify-between bg-white'>
+    <div className='py-2 px-8 border-b-4 border-b-green-600 flex justify-between bg-white sticky top-0 z-[1]'>
         <Link to='/'><img className='w-[120px] h-[40px]' src={logo} alt='Logo of Rambo with a vector of a dog and text Rambo written beside it.'/></Link>
         <div className='flex gap-3 text-green-600 items-center'>
             <Link to='/'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'>Home</div></Link>
             <Link to='/about'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'>About</div></Link>
-            <Link to='/community'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'> Community</div></Link>
+            <Link to='/contact-us'><div className='hover:border-b-2 hover:border-b-green-600 hover:cursor-pointer transition-all'>Contact Us</div></Link>
         </div>
         {user?(
           <div className='flex gap-2 items-center'>
