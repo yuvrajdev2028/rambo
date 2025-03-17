@@ -2,30 +2,44 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div className='px-4 py-2'>
-      <h2 className='font-semibold text-2xl text-green-600 border-b-4 border-b-green-600 w-[35%] mx-auto mb-4'>About Us</h2>
-      <p className='text-left mb-2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In at feugiat ante, quis iaculis tortor. 
-        Maecenas gravida est sit amet euismod rhoncus. Aliquam interdum libero ac pulvinar pharetra. Suspendisse
-          id lacinia arcu. Nunc ac tincidunt mauris, eu pharetra metus. Cras ultrices est quis elit ultrices, ac
-          rutrum nisl tincidunt. Mauris viverra aliquam facilisis. Ut at quam eget lectus tristique accumsan.</p>
-      <p className='text-left mb-2'>Phasellus et dui justo. Nam eu nulla sit amet nulla pulvinar dapibus. Proin at eleifend neque. Cras vitae
-          porttitor ex. Proin aliquet maximus est, eu condimentum turpis dapibus a. Curabitur erat nunc, aliquet at
-          turpis at, convallis tristique turpis. Nam cursus tristique tellus sit amet gravida. Nunc malesuada ornare
-            eros, et euismod quam consequat vel. Donec tempor sollicitudin venenatis. Curabitur porttitor velit 
-            vulputate augue aliquam, eu aliquet arcu bibendum. Duis hendrerit iaculis erat a ultrices. Aliquam erat volutpat.
-            Nam interdum mollis lacus sit amet mollis. Nam ac nisl nec velit sollicitudin porttitor in vel est. Nulla 
-            malesuada porta leo id molestie.</p>
-      <p className='text-left mb-2'>Mauris risus lectus, commodo ac nibh sed, facilisis tempor nisl. Donec ultricies nulla scelerisque nisl 
-        egestas bibendum. Ut quis risus at nisl hendrerit convallis id eget augue. Nullam porttitor, dolor eu gravida 
-        tempor, turpis dolor luctus lacus, in lacinia ligula elit vehicula justo. Curabitur sed ullamcorper urna. 
-        Aenean accumsan magna nec libero tincidunt, in dictum lorem tristique. Donec id eros a sapien sagittis tincidunt
-          non quis ligula.</p>
-      <p className='text-left mb-2'>Sed suscipit suscipit felis, nec varius felis pellentesque ac. Mauris vel lacus tristique, rhoncus lorem nec, 
-        iaculis velit. Etiam rhoncus vestibulum sapien, eu feugiat massa. Duis erat velit, facilisis sed mattis ut, 
-        hendrerit laoreet metus. Phasellus sed gravida turpis. Vivamus sit amet vulputate felis. Phasellus hendrerit et
-          metus eget lacinia. Mauris porttitor tincidunt fermentum. Suspendisse commodo imperdiet nunc at euismod. Vestibulum
-          sapien est, vulputate in dolor ac, vestibulum fermentum est. Cras eu diam eu elit vulputate consequat. Etiam 
-          porttitor purus sed dui venenatis interdum posuere ut turpis.</p>
+    <div className='overflow-auto scrollbar-hidden py-8'>
+      <div className='w-3/5 mx-auto'>
+        <h2 className='font-semibold text-4xl text-green-600 border-b-4 border-b-green-600 mx-auto mb-6 w-fit'>About Us</h2>
+        <h3 className='font-light text-2xl text-green-600 mx-auto mb-4 w-fit'>Our Mission</h3>
+        <p className='text-lg mb-4'>At <span className='font-thin text-xl text-green-700'>Rambo</span>, we believe that every dog deserves care, safety, and 
+        love. Our platform connects compassionate volunteers with dedicated NGOs to create a network of support for stray and injured dogs. By working together, we 
+        aim to rescue, rehabilitate, and provide a better future for animals in need.</p>
+        <h3 className='font-light text-2xl text-green-600 mx-auto mb-4 w-fit'>What We Do</h3>
+        <p className='text-lg mb-2'>Our platform empowers volunteers to report cases of dogs in distress, ensuring that help reaches them quickly and efficiently. 
+        NGOs can respond to these reports, track cases, and provide real-time updates — creating a transparent and collaborative rescue process.</p>
+        <h4 className='text-xl mb-2 font-medium'>For Volunteers:</h4>
+        <ul className='text-lg mb-2 list-disc list-inside'>
+          <li>Report cases of injured or stray dogs in your community.</li>
+          <li>Track the status of your reports in real-time.</li>
+          <li>Stay updated on how the case is being handled.</li>
+        </ul>
+        <h4 className='text-xl mb-2 font-medium'>For NGOs:</h4>
+        <ul className='text-lg mb-4 list-disc list-inside'>
+          <li>Access a centralized dashboard for managing reports.</li>
+          <li>Respond to cases promptly and provide updates.</li>
+          <li>Coordinate rescue and rehabilitation efforts efficiently.</li>
+        </ul>
+        <h3 className='font-light text-2xl text-green-600 mx-auto mb-4 w-fit'>Why It Matters</h3>
+        <p className='text-lg mb-3'>Our vision is to create a world where no stray or injured dog is left without care. We believe that by combining technology, 
+        compassion, and community support, we can give every dog the chance at a better life.</p>
+        <p className='text-lg mb-4'>
+          Together, we can:
+          <ul className='list-disc list-inside'>
+            <li>Provide faster medical aid to injured dogs.</li>
+            <li>Rehabilitate stray dogs and help them find homes.</li>
+            <li>Build a compassionate community where every life matters.</li>
+          </ul>
+        </p>
+        <h3 className='font-light text-2xl text-green-600 mx-auto mb-4 w-fit'>Join Us</h3>
+        <p className='text-lg mb-4'>Whether you are a volunteer looking to make a difference or an NGO dedicated to animal welfare, &nbsp;
+          <span className='font-thin text-xl text-green-700'>Rambo</span> is the place where meaningful change happens. Together, we can give every dog the care 
+          they deserve.Let us make a difference — one rescue at a time. 🐶❤️</p>
+      </div>
     </div>
   )
 }
