@@ -7,7 +7,7 @@ const Dashboard = () => {
   const { user } = useContext(AuthContext)
   const role = user.role;
   return (
-    <div>
+    <div className='flex-grow overflow-hidden'>
       {role==="ngo"?(<NGODashboard/>):(<VolunteerDashboard/>)}
     </div>
   )
