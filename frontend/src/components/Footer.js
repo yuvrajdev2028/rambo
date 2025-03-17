@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <div className='p-8 flex justify-between border-t-4 border-t-green-600'>
         <div>
-            <img className='w-[180px] h-[60px]' src={logo}></img>
+            <img className='w-[180px] h-[60px]' src={logo} alt='Logo of Rambo'></img>
             <p className='text-green-600 font-thin text-xs w-[180px] text-center'>Connecting Compassion.</p>
         </div>
         <div>
