@@ -14,13 +14,13 @@ const Footer = () => {
             <h3 className='font-semibold text-lg mb-4'>Quick Links</h3>
             <h4 className='mb-2 hover:text-green-500'>Home</h4>
             <h4 className='mb-2 hover:text-green-500'>About</h4>
-            <h4 className='hover:text-green-500'>Community</h4>
+            <h4 className='hover:text-green-500'>Contact Us</h4>
         </div>
-        <div>
+        {/* <div>
             <h3 className='font-semibold text-lg mb-4'>Get In Touch</h3>
             <h4 className='mb-2 hover:text-green-500'>Contact Us</h4>
             <h4 className='hover:text-green-500'>Newsletter</h4>
-        </div>
+        </div> */}
         <div>
             <h3 className='font-semibold text-lg mb-4'>Follow Us</h3>
             <div className='flex gap-4 justify-center'>
