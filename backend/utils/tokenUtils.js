@@ -26,3 +26,16 @@ exports.generateRefreshToken=({userId,role})=>{
         return null;
     }
 }
+
+exports.generateOTPToken=({email,otp})=>{
+    try{
+        return jwt.sign({
+                    email: email,
+                    otp: otp,
+                }, process.env.OTP_SECRET, {expiresIn: '15m'})
+    }
+    catch(error){
+        console.log(error);
+        return null;
+    }
+}
