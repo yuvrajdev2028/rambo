@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGoogle} from '@fortawesome/free-brands-svg-icons'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 const apiUrl=process.env.REACT_APP_BASE_URL;
 
 const SignupForm = () => {
   const navigate=useNavigate();
+
+  const [errorAlert,setErrorAlert] = useState(null);
+
   const [formData,setFormData] = useState({
-    email:"",
-    name:"",
-    password:"",
-    role:"volunteer"
+    email:'',
+    name:'',
+    password:'',
+    role:'volunteer',
+    location:'',
+    about:''
   });
 
   const changeHandler = (event)=>{
@@ -38,18 +41,24 @@ const SignupForm = () => {
       if(response.status===201){
         navigate('/login')
       }
+      else{
+        throw new Error('Signup Failed!')
+      }
     }
     catch(error)
     {
       console.log('Errors Occured!!!')
       console.log(error);
+
     }
   
     setFormData({
       email:"",
       name:"",
       password:"",
-      role:"volunteer"
+      role:"volunteer",
+      location:'',
+      about:''
     })
     const selectRole = document.querySelector('#role');
     selectRole.selectedIndex=0;
@@ -59,6 +68,7 @@ const SignupForm = () => {
       <form id='signup-form' onSubmit={submitHandler} className='flex flex-col'>
         <label htmlFor='email' className='text-left text-sm font-semibold'>EMAIL ID</label>
         <input type='email' name='email' id='email' value={formData.email} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Email ID' required></input>
+
         <label htmlFor='name' className='text-left text-sm font-semibold mt-2'>NAME</label>
         <input type='text' name='name' id='name' value={formData.name} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Name' required></input>
         <label htmlFor='password' className='text-left text-sm font-semibold mt-2'>PASSWORD</label>
@@ -75,17 +85,11 @@ const SignupForm = () => {
           <textarea name='about' id='about' value={formData.about} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='About' required />
           </div>
           : (<></>)}
+        {}
         <button type='submit' className='bg-green-700 w-36 p-2 text-white mx-auto rounded-3xl my-5 hover:bg-green-600 transition-all'>SignUp</button>
-        <div className='flex items-center justify-between mb-10 mt-5'>
-          <div className='h-[2px] bg-[#EFF0F2] w-[45%]'></div>
-          <div className='text-xs text-[#838383]'>OR</div>
-          <div className='h-[2px] bg-[#EFF0F2] w-[45%]'></div>
-        </div>
-        <div className='flex flex-col items-center'>
-          <h5 className='text-xs text-[#838383]'>Log In Using</h5>
-          <div className='mt-3 text-green-600'>
-          <FontAwesomeIcon icon={faGoogle} />
-          </div>
+        <div className='text-xs text-[#838383] text-center'>
+          <span>Already signed up? </span>
+          <Link to='/login'><span className='underline text-green-600'>LogIn</span></Link>
         </div>
       </form>
   )
