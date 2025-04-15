@@ -1,18 +1,25 @@
 const User = require('../models/users');
 const { hashPassword, comparePassword } = require('../utils/hashUtils');
 const jwt = require('jsonwebtoken');
-const { generateAccessToken, generateRefreshToken } = require('../utils/tokenUtils');
+const { generateAccessToken, generateRefreshToken, generateOTPToken } = require('../utils/tokenUtils');
+const sendEmail = require('../utils/mailUtils');
 
 exports.signup = async(req,res)=>{
     try{
         console.log("in signup-backend")
-        const { name, email, password, role } = req.body;
+        const { name, email, password, role, location, about } = req.body;
         const hashedPassword = await hashPassword(password);
         if(!hashedPassword){
             throw new Error('password cannot be hashed');
         }
-        const newUser = new User({ name, email, password:hashedPassword, role});
-        await newUser.save();
+        if(role==='volunteer') {
+            const newUser = new User({ name, email, password:hashedPassword, role});
+            await newUser.save();
+        }
+        else{
+            const newUser = new User({ name, email, password:hashedPassword, role, location, about});
+            await newUser.save();
+        }
         return res.status(201).json({
             message: 'Signup successfull.'
         })
@@ -110,6 +117,87 @@ exports.refresh = (req,res)=>{
     catch(error){
         return res.status(500).json({
             message: 'Token Refresh Failed.'
+        })
+    }
+}
+
+exports.validateUser = async(req,res)=>{
+    try{
+        const {email} = req.body;
+        const user = await User.findOne({email});
+        if(user){
+            return res.status(200).json({
+                message:'User exists.'
+            })
+        }
+        return res.status(401).json({
+            message:'User does not exist.'
+        })
+    }
+    catch(error){
+        return res.status(500).json({
+            message:'Error occured while validating user.'
+        })
+    }
+}
+
+exports.sendOTP = async(req,res)=>{
+    try{
+        const {email} = req.body;
+        const otp = Math.floor(1000 + Math.random() * 9000).toString();
+        const otpToken = generateOTPToken({email: email, otp: otp})
+        await sendEmail(email, 'OTP for Email verification', `Your OTP for Email verification is ${otp}.`);
+        res.status(200).json({
+            message:'OTP sent successfully.',
+            otpToken : otpToken
+        })
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message:'Error occured while sending OTP.',
+        })
+    }
+}
+
+exports.verifyOTP = async(req,res)=>{
+    try{
+        const { email, otp, otpToken } = req.body;
+        const decoded = jwt.verify(otpToken, process.env.OTP_SECRET);
+
+        if (decoded.email !== email) {
+        return res.status(400).json({ message: 'Invalid email' });
+        }
+
+        if (decoded.otp !== otp) {
+        return res.status(400).json({ message: 'Invalid OTP' });
+        }
+
+        res.status(200).json({ message: 'OTP verified successfully' });
+    }
+    catch(error){
+        return res.status(500).json({
+            message:'Error occured while verifying OTP.'
+        })
+    }
+}
+
+exports.changePassword=async(req,res)=>{
+    try{
+        const { email, newPassword } = req.body;
+        const hashedPassword = await hashPassword(newPassword);
+        if(!hashedPassword){
+            throw new Error('password cannot be hashed');
+        }
+        await User.findOneAndUpdate({email:email},{password:hashedPassword});
+        return res.status(200).json({
+            message:'Password changed successfully.'
+        })
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message:'Error occured while changing Password'
         })
     }
 }
