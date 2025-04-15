@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["volunteer","ngo"],
         required:true,
+    },
+    location:{
+        type: String,
+    },
+    about:{
+        type: String,
     }
 },{timestamps:true,})
 
