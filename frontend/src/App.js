@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound';
 import { useContext } from 'react';
 import AuthContext from './contexts/AuthContext';
 import Contact from './pages/Contact'
+import ForgotPassword from './pages/ForgotPassword';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/dashboard' element={user?(<Dashboard/>):(<NotFound/>)}/>
         <Route path='/login' element={<Login/>} />
         <Route path='/signup' element={<Signup/>} />
+        <Route path='/forgot-password' element={<ForgotPassword/>} />
         <Route path='*' element={<NotFound/>} />
       </Routes>
       </div>
