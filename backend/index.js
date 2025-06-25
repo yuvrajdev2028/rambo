@@ -3,13 +3,15 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const helmet=require('helmet');
 const cors=require('cors');
-const dbConnect= require('./config/database')
+const dbConnect= require('./config/database');
+const cloudinaryConnect = require('./config/cloudinary');
 const user = require('./routes/userRoutes');
 const response = require('./routes/responseRoutes');
 const report = require('./routes/reportRoutes');
 
 const PORT=process.env.PORT || 5000;
 
+// create app
 const app=express();
 
 // app.use((req, res, next) => {
@@ -19,21 +21,29 @@ const app=express();
 //     next();
 // });
 
+// add middleware
 app.use(cookieParser());
 app.use(express.json());
 app.use(helmet());
 app.use(cors({origin: 'http://localhost:3000', credentials:true}))
 
+// mount routes
 app.use('/api/v1',user);
 app.use('/api/v1',response);
 app.use('/api/v1',report);
 
+// connect to database
+dbConnect();
+
+// connect to cloudinary
+cloudinaryConnect();
+
+// start server
 app.listen(PORT,()=>{
     console.log(`App is listening to port ${PORT}`);
 })
 
-dbConnect();
-
+// Test route
 app.get('/',(req,res)=>{
     res.send(`<h1>Hello World</h1>`);
 })
