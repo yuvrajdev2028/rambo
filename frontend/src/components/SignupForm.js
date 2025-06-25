@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
+import OTPInput from './OTPInput';
+import PasswordInput from './PasswordInput';
+import UtilsContext from '../contexts/UtilsContext';
 const apiUrl=process.env.REACT_APP_BASE_URL;
 
 const SignupForm = () => {
   const navigate=useNavigate();
+  const { isEmailValid, isPasswordValid } = useContext(UtilsContext);
+
 
   const [errorAlert,setErrorAlert] = useState(null);
 
@@ -27,22 +32,27 @@ const SignupForm = () => {
   const submitHandler = async(event)=>{
     event.preventDefault();
     try{
-      console.log(formData)
-      const request=new Request(`${apiUrl}/signup`,{
-        method:"POST",
-        headers:{
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify(formData),
-      });
-      console.log(`req.body sent is: ${request.body}`);
-      const response=await fetch(request);
-      console.log(response);
-      if(response.status===201){
-        navigate('/login')
+      if(!isPasswordValid(formData.password)){
+        throw new Error('Password not valid.')
       }
       else{
-        throw new Error('Signup Failed!')
+        console.log(formData)
+        const request=new Request(`${apiUrl}/signup`,{
+          method:"POST",
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(formData),
+        });
+        console.log(`req.body sent is: ${request.body}`);
+        const response=await fetch(request);
+        console.log(response);
+        if(response.status===201){
+          navigate('/login')
+        }
+        else{
+          throw new Error('Signup Failed!')
+        }
       }
     }
     catch(error)
@@ -69,10 +79,22 @@ const SignupForm = () => {
         <label htmlFor='email' className='text-left text-sm font-semibold'>EMAIL ID</label>
         <input type='email' name='email' id='email' value={formData.email} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Email ID' required></input>
 
+        {/* <button type='button' className='bg-green-700 w-36 p-2 text-white mx-auto rounded-3xl my-5 hover:bg-green-600 transition-all' onClick={sendOTPHandler}>Send OTP</button> */}
+
+        {/* <OTPInput length={4} onOTPSubmit={onOTPSubmit} /> */}
+
         <label htmlFor='name' className='text-left text-sm font-semibold mt-2'>NAME</label>
         <input type='text' name='name' id='name' value={formData.name} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Name' required></input>
+
         <label htmlFor='password' className='text-left text-sm font-semibold mt-2'>PASSWORD</label>
-        <input type='password' name='password' id='password' value={formData.password} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Password' required></input>
+        <PasswordInput name={'password'} id={'password'} value={formData.password} changeHandler={changeHandler} placeholder={'Password'}/>
+
+        <ul className='list-inside list-disc text-xs mt-2'>
+            <li>Password must be at least 8 characters long.</li>
+            <li>It must contain at least 1 number, 1 special character, 1 capital letter and 1 small letter.</li>
+            <li>Special characters allowed are '@', '#', '$', '%', '&'.</li>
+        </ul>
+        
         <label htmlFor='role' className='text-left text-sm font-semibold mt-2'>ROLE</label>
         <select name='role' id='role' form='signup-form' onClick={changeHandler} className='bg-[#EFF0F2] p-2'>
           <option value='volunteer' selected>Volunteer</option>
