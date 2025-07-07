@@ -3,13 +3,13 @@ const cloudinary = require('cloudinary').v2;
 
 exports.createReport = async(req,res) => {
     try{
-        const { ngoId, title, description, location, status } = req.body;
+        const { ngo, title, description, location, status } = req.body;
         const filepath = req.file.path;
         const result = await cloudinary.uploader.upload(filepath , {
             folder: 'rambo',
         });
         console.log(result);
-        const newReport = new Report({ volunteerId: req.user.userId, ngoId, title, description, location, image_url: result.secure_url, status});
+        const newReport = new Report({ volunteerId: req.user.userId, ngoId:ngo, title, description, location, image_url: result.secure_url, status});
         await newReport.save();
         return res.status(201).json({
             message: 'Report created successfully.'
