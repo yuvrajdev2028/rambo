@@ -201,3 +201,26 @@ exports.changePassword=async(req,res)=>{
         })
     }
 }
+
+exports.getNGOList=async(req,res)=>{
+    try{
+        const ngoList = await User.find({role:'ngo'});
+        let responseData = [];
+        for(let i=0;i<ngoList.length;i++){
+            responseData.push({
+                id: ngoList[i]._id,
+                name: ngoList[i].name,
+            })
+        }
+        res.status(200).json({
+            message:'NGO List fetched successfully.',
+            data: responseData,
+        })
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message:'Error occured while fetching NGO List'
+        })
+    }
+}
