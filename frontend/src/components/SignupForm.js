@@ -57,9 +57,7 @@ const SignupForm = () => {
     }
     catch(error)
     {
-      console.log('Errors Occured!!!')
-      console.log(error);
-
+      setErrorAlert(error.message);
     }
   
     setFormData({
@@ -107,7 +105,7 @@ const SignupForm = () => {
           <textarea name='about' id='about' value={formData.about} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='About' required />
           </div>
           : (<></>)}
-        {}
+        {(errorAlert)?<p className='text-xs text-red-600'>{errorAlert}</p>:<></>}
         <button type='submit' className='bg-green-700 w-36 p-2 text-white mx-auto rounded-3xl my-5 hover:bg-green-600 transition-all'>SignUp</button>
         <div className='text-xs text-[#838383] text-center'>
           <span>Already signed up? </span>
