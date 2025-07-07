@@ -204,10 +204,12 @@ export const AuthProvider = ({children})=>{
                 }
 
                 const data = await res.json();
+                console.log('Data: ',data);
                 setAccessToken(data.accessToken);
                 const decode = jwtDecode(data.accessToken);
                 setUser({id: decode.userId, role: decode.role});
                 console.log('session restored successfully');
+                navigate('/dashboard');
             }
             catch(error){
                 console.log(error);
