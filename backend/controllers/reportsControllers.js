@@ -38,3 +38,22 @@ exports.getAllReports = async(req,res) => {
         })
     }
 }
+
+exports.updateStatus = async(req,res) => {
+    try{
+        console.log(req.body);
+        const reportId = req.body.reportId;
+        const newStatus = req.body.newStatus;
+        await Report.findOneAndUpdate({_id:reportId},{status:newStatus});
+        return res.status(200).json({
+            message: `Status of report changed to ${newStatus}`,
+        })
+    }
+    catch(error)
+    {
+        return res.status(500).json({
+            error: `Error: ${error}`,
+            message: 'Error occured while updating status.',
+        })
+    }
+}
