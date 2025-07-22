@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 } */
+
+ input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px #020617 inset !important; /* bg-slate-950 */
+    -webkit-text-fill-color: #ffffff !important; /* text-white */
+  }
