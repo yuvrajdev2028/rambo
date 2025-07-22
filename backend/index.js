@@ -25,7 +25,7 @@ const app=express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(helmet());
-app.use(cors({origin: 'https://rambo-woad.vercel.app/', credentials:true}))
+app.use(cors({origin: 'https://rambo-woad.vercel.app', credentials:true}))
 
 // mount routes
 app.use('/api/v1',user);
