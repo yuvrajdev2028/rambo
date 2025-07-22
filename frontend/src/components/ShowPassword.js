@@ -9,7 +9,7 @@ const ShowPassword = ({hidePassword,setHidePassword}) => {
         else setHidePassword(true);
     }
   return (
-    <button onClick={clickHandler} className='border border-gray-400 p-2 w-10'>
+    <button onClick={clickHandler} className='bg-slate-950 p-2 w-10'>
         {(hidePassword)?(<FontAwesomeIcon icon={faEyeSlash} />):(<FontAwesomeIcon icon={faEye} />)}
     </button>
   )

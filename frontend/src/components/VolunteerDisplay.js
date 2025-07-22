@@ -3,6 +3,7 @@ import AuthContext from '../contexts/AuthContext'
 import MetricCard from './MetricCard';
 import MyReportsCard from './MyReportsCard';
 import SubmitReport from './SubmitReport';
+import MyReports from './MyReports';
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
@@ -35,11 +36,14 @@ const VolunteerDisplay = ({tab,setTab}) => {
   }
   else if(tab==='My Reports'){
     return(
-      <div className='p-2 flex-grow overflow-auto scrollbar-hidden'>
-        <MyReportsCard />
-        <MyReportsCard />
-        <MyReportsCard />
-      </div>
+      // <div className='p-2 flex-grow overflow-auto scrollbar-hidden'>
+      //   <MyReportsCard />
+      //   <MyReportsCard />
+      //   <MyReportsCard />
+      // </div>
+      <>
+        <MyReports />
+      </>
     )
   }
 }

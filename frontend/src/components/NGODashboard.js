@@ -5,7 +5,7 @@ import NGODisplay from './NGODisplay'
 const NGODashboard = () => {
   const [tab,setTab] = useState('Profile');
   return (
-    <div className='flex h-full'>
+    <div className='flex-1 flex'>
         <NGOSidebar tab={tab} setTab={setTab}/>
         <NGODisplay tab={tab}/>
     </div>

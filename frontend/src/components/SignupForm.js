@@ -74,17 +74,17 @@ const SignupForm = () => {
 
   return (
       <form id='signup-form' onSubmit={submitHandler} className='flex flex-col'>
-        <label htmlFor='email' className='text-left text-sm font-semibold'>EMAIL ID</label>
-        <input type='email' name='email' id='email' value={formData.email} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Email ID' required></input>
+        <label htmlFor='email' className='text-left text-sm font-semibold mb-2'>EMAIL ID</label>
+        <input type='email' name='email' id='email' value={formData.email} onChange={changeHandler} className='bg-slate-950 p-2 focus:outline-none' placeholder='Email ID' required></input>
 
         {/* <button type='button' className='bg-green-700 w-36 p-2 text-white mx-auto rounded-3xl my-5 hover:bg-green-600 transition-all' onClick={sendOTPHandler}>Send OTP</button> */}
 
         {/* <OTPInput length={4} onOTPSubmit={onOTPSubmit} /> */}
 
-        <label htmlFor='name' className='text-left text-sm font-semibold mt-2'>NAME</label>
-        <input type='text' name='name' id='name' value={formData.name} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Name' required></input>
+        <label htmlFor='name' className='text-left text-sm font-semibold mt-4 mb-2'>NAME</label>
+        <input type='text' name='name' id='name' value={formData.name} onChange={changeHandler} className='bg-slate-950 p-2 focus:outline-none' placeholder='Name' required></input>
 
-        <label htmlFor='password' className='text-left text-sm font-semibold mt-2'>PASSWORD</label>
+        <label htmlFor='password' className='text-left text-sm font-semibold mt-4 mb-2'>PASSWORD</label>
         <PasswordInput name={'password'} id={'password'} value={formData.password} changeHandler={changeHandler} placeholder={'Password'}/>
 
         <ul className='list-inside list-disc text-xs mt-2'>
@@ -93,16 +93,16 @@ const SignupForm = () => {
             <li>Special characters allowed are '@', '#', '$', '%', '&'.</li>
         </ul>
         
-        <label htmlFor='role' className='text-left text-sm font-semibold mt-2'>ROLE</label>
-        <select name='role' id='role' form='signup-form' onClick={changeHandler} className='bg-[#EFF0F2] p-2'>
+        <label htmlFor='role' className='text-left text-sm font-semibold mt-4 mb-2'>ROLE</label>
+        <select name='role' id='role' form='signup-form' onClick={changeHandler} className='bg-slate-950 p-2 focus:outline-none'>
           <option value='volunteer' selected>Volunteer</option>
           <option value='ngo'>NGO</option>
         </select>
         {(formData.role === 'ngo') ? <div className='flex flex-col'>
-          <label htmlFor='location' className='text-left text-sm font-semibold mt-2'>LOCATION</label>
-          <input type='text' name='location' id='location' value={formData.location} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Location' required></input>
-          <label htmlFor='about' className='text-left text-sm font-semibold mt-2'>ABOUT</label>
-          <textarea name='about' id='about' value={formData.about} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='About' required />
+          <label htmlFor='location' className='text-left text-sm font-semibold mt-4 mb-2'>LOCATION</label>
+          <input type='text' name='location' id='location' value={formData.location} onChange={changeHandler} className='bg-slate-950 p-2 focus:outline-none' placeholder='Location' required></input>
+          <label htmlFor='about' className='text-left text-sm font-semibold mt-4 mb-2'>ABOUT</label>
+          <textarea name='about' id='about' value={formData.about} onChange={changeHandler} className='bg-slate-950 p-2 focus:outline-none' placeholder='About' required />
           </div>
           : (<></>)}
         {(errorAlert)?<p className='text-xs text-red-600'>{errorAlert}</p>:<></>}

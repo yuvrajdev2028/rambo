@@ -1,9 +1,9 @@
 import React,{useContext} from 'react'
 import AuthContext from '../contexts/AuthContext'
 import MetricCard from './MetricCard';
-import IncomingReportCard from './IncomingReportCard';
-import ActiveCaseCard from './ActiveCaseCard';
-import ResolvedCaseCard from './ResolvedCaseCard';
+import IncomingReports from './IncomingReports';
+import ActiveCase from './ActiveCase';
+import ResolvedCase from './ResolvedCase';
 
 const NGODisplay = ({tab}) => {
   const { user } = useContext(AuthContext);
@@ -23,33 +23,17 @@ const NGODisplay = ({tab}) => {
   }
   else if(tab==='Incoming Reports'){
     return(
-      <div className='p-2 flex-grow overflow-auto scrollbar-hidden'>
-        <IncomingReportCard />
-        <IncomingReportCard />
-        <IncomingReportCard />
-        <IncomingReportCard />
-        <IncomingReportCard />
-        <IncomingReportCard />
-        <IncomingReportCard />
-      </div>
+      <IncomingReports />
     )
   }
   else if(tab==='Active Cases'){
     return(
-      <div className='p-2 flex-grow overflow-auto scrollbar-hidden'>
-        <ActiveCaseCard />
-        <ActiveCaseCard />
-        <ActiveCaseCard />
-      </div>
+      <ActiveCase />
     )
   }
   else if(tab==='Resolved Cases'){
     return(
-      <div className='p-2 flex-grow overflow-auto scrollbar-hidden'>
-        <ResolvedCaseCard />
-        <ResolvedCaseCard />
-        <ResolvedCaseCard />
-      </div>
+      <ResolvedCase />
     )
   }
 }

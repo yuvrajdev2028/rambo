@@ -43,10 +43,10 @@ const LoginForm = () => {
 
   return (
       <form onSubmit={submitHandler} className='flex flex-col'>
-        <label htmlFor='email' className='text-left text-sm font-semibold'>EMAIL</label>
-        <input type='email' name='email' id='email' value={formData.email} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Email' required></input>
+        <label htmlFor='email' className='text-left text-sm font-semibold mb-2'>EMAIL</label>
+        <input type='email' name='email' id='email' value={formData.email} onChange={changeHandler} className='bg-slate-950 p-2 focus:outline-none' placeholder='Email' required></input>
 
-        <label htmlFor='password' className='text-left text-sm font-semibold mt-2'>PASSWORD</label>
+        <label htmlFor='password' className='text-left text-sm font-semibold mt-4 mb-2'>PASSWORD</label>
         <PasswordInput name={'password'} id={'password'} value={formData.password} changeHandler={changeHandler} placeholder={'Password'}/>
 
         <Link to='/forgot-password'><button type='button' className='text-xs mt-2 text-[#838383]'>Forgot Password?</button></Link>
