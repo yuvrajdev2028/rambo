@@ -18,8 +18,8 @@ function App() {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className="App">
-      <div className='h-screen flex flex-col'>
+    <div className="App bg-slate-950 text-white">
+      <div className='min-h-screen flex flex-col'>
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>} />
