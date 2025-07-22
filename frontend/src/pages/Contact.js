@@ -19,8 +19,7 @@ const Contact = () => {
             <h3 className='font-light text-2xl text-green-600 mx-auto mb-4 w-fit'>Follow Us</h3>
             <p>Stay connected with us on social media to see the latest updates, rescue stories, and more:
                 <ul className='list-disc list-inside'>
-                    <li><a href='facebook.com' className='underline text-green-600'>Facebook</a></li>
-                    <li><a href='instagram.com' className='underline text-green-600'>Instagram</a></li>
+                    <li><a href='linkedin.com' className='underline text-green-600'>LinkedIn</a></li>
                     <li><a href='x.com' className='underline text-green-600'>X</a></li>
                 </ul>
             </p>
