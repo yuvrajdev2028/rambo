@@ -4,7 +4,7 @@ const Response = require('../models/responses');
 exports.addResponse = async(req,res)=>{
     try{
     const { reportId, responseMessage } = req.body;
-    const report = await Report.findOneAndUpdate({_id:reportId},{status:'resolved'});
+    const report = await Report.findOne({_id:reportId});
     if(String(report.ngoId)===req.user.userId){
         const newResponse = new Response({ ngoId:req.user.userId, reportId, responseMessage});
         await newResponse.save();
@@ -26,7 +26,7 @@ exports.addResponse = async(req,res)=>{
 
 exports.getResponses = async(req,res)=>{
     try{
-        const { reportId } = req.body;
+        const reportId = req.params.reportId;
         const report = await Report.findOne({_id:reportId});
         if(String(report.ngoId)===req.user.userId || String(report.volunteerId)===req.user.userId){
             const response = await Response.find({reportId});
