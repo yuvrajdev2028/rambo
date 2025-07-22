@@ -119,14 +119,14 @@ const ForgotPasswordForm = () => {
     }
 
   return (
-    <form onSubmit={submitHandler} className='flex flex-col'>
+    <form onSubmit={submitHandler} className='flex flex-col bg-slate-900'>
         {
             (!passwordChangeRequested)?
             (
                 (!verified)?
                 <>
                     <label htmlFor='email' className='text-left text-sm font-semibold'>EMAIL</label>
-                    <input type='email' name='email' id='email' value={formData.email} onChange={changeHandler} className='bg-[#EFF0F2] p-2' placeholder='Email' required></input>
+                    <input type='email' name='email' id='email' value={formData.email} onChange={changeHandler} className='bg-slate-950 p-2' placeholder='Email' required></input>
                     {
                         (emailValid)?
                         (<>
