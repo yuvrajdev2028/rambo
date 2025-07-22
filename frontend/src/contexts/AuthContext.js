@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
+import { useLocation } from 'react-router-dom';
 
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
@@ -12,6 +13,7 @@ export const AuthProvider = ({children})=>{
     const [user,setUser]=useState(null);
     const [otpToken, setOtpToken] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const login = async(email, password)=>{
         try{
@@ -209,7 +211,9 @@ export const AuthProvider = ({children})=>{
                 const decode = jwtDecode(data.accessToken);
                 setUser({id: decode.userId, role: decode.role});
                 console.log('session restored successfully');
-                navigate('/dashboard');
+                if(location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/'){
+                    navigate('/dashboard');
+                }
             }
             catch(error){
                 console.log(error);
