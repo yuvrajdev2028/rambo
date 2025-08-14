@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
-    <div className='w-3/5 mx-auto'>
+    <div className='md:w-3/5 mx-auto max-[768px]:px-8 w-full'>
 
       <div className='hero-section text-left py-12 flex flex-col gap-4'>
-        <h3 className='text-7xl font-bold text-green-600'>Connecting compassion.</h3>
+        <h3 className='text-5xl sm:text-6xl md:text-7xl font-bold text-green-600'>Connecting compassion.</h3>
         <p className='font-thin text-3xl '>Rambo is a platform devoted to connecting compassionate volunteers to NGOs working to save lives of humankind's best freinds.</p>
         <div className='flex gap-2'>
           <Link to='/signup'><button className='text-xl rounded-full px-4 py-2 bg-green-600 text-white hover:bg-green-700'>Get Started</button></Link>
@@ -20,15 +20,15 @@ const Home = () => {
             <h3 className='text-4xl font-bold text-green-600 pb-2'>Key Features</h3>
             <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-green-500 to-transparent"></div>
           </div>
-          <div className='flex justify-center gap-3 m-3'>
-            <div className='volunteers w-1/2'>
+          <div className='flex justify-center gap-3 m-3 max-[700px]:flex-col'>
+            <div className='volunteers w-1/2 max-[700px]:w-full'>
               <h4 className='text-xl font-semibold mb-2'>For Volunteers:</h4>
               <ul className='list-disc list-inside'>
-                <li>Reoprt stray dogs requiring assistance.</li>
+                <li>Report stray dogs requiring assistance.</li>
                 <li>Track status of your reports.</li>
               </ul>
             </div>
-            <div className='ngos w-1/2'>
+            <div className='ngos w-1/2 max-[700px]:w-full'>
               <h4 className='text-xl font-semibold mb-2'>For NGOs:</h4>
               <ul className='list-disc list-inside'>
                 <li>Receive reports from volunteers.</li>
@@ -59,7 +59,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='h-[200px] bg-gradient-to-tl from-green-500 via-transparent via-40% to-transparent flex flex-col justify-center gap-6 p-4'>
+      <div className='bg-gradient-to-tl from-green-500 via-transparent via-40% to-transparent flex flex-col justify-center gap-6 p-4'>
           <h2 className='text-4xl font-thin text-green-700'>Connect Now To Make A Difference. Join Us. One Rescue At A Time.</h2>
           <Link to='/signup'><button className='rounded-full px-6 py-3 bg-green-600 text-white hover:bg-green-700 transition-all'>Sign Up</button></Link>
       </div>

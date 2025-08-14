@@ -13,9 +13,9 @@ const VolunteerDisplay = ({tab,setTab}) => {
   if(tab==='Profile'){
     return (
       <div className='p-2 flex-grow'>
-        <h1>Welcome, {user.id}</h1>
+        <h1>Welcome, {user.name}</h1>
         <p>Here's an overview of reports you're managing</p>
-        <div className='flex justify-around'>
+        <div className='flex max-[950px]:flex-col gap-4'>
           <MetricCard heading={'Total Reports'} metric={5} />
           <MetricCard heading={'Pending Reports'} metric={2} />
           <MetricCard heading={'Resolved Reports'} metric={1} />
