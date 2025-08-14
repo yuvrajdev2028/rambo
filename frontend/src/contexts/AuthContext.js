@@ -36,7 +36,7 @@ export const AuthProvider = ({children})=>{
                 console.log('Data: ',data);
                 setAccessToken(data.accessToken);
                 const decode = jwtDecode(data.accessToken)
-                setUser({id: decode.userId, role: decode.role});
+                setUser({id: decode.userId, role: decode.role, name: decode.name});
                 navigate('/dashboard')
             }
             else if(response.status===401) return 401;
@@ -209,7 +209,7 @@ export const AuthProvider = ({children})=>{
                 console.log('Data: ',data);
                 setAccessToken(data.accessToken);
                 const decode = jwtDecode(data.accessToken);
-                setUser({id: decode.userId, role: decode.role});
+                setUser({id: decode.userId, role: decode.role, name: decode.name});
                 console.log('session restored successfully');
                 if(location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/'){
                     navigate('/dashboard');
