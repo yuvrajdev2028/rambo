@@ -44,10 +44,10 @@ exports.login = async(req,res)=>{
             })
         }
         // Generate Access Token
-        const accessToken = generateAccessToken({userId: user._id,role: user.role});
+        const accessToken = generateAccessToken({userId: user._id,role: user.role,name: user.name});
 
         // Generate Refresh Token
-        const refreshToken = generateRefreshToken({userId: user._id,role: user.role});
+        const refreshToken = generateRefreshToken({userId: user._id,role: user.role,name: user.name});
 
         if(!accessToken || !refreshToken){
             throw new Error("Error occured while generating tokens.")
