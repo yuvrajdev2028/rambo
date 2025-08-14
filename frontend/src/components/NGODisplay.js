@@ -11,7 +11,7 @@ const NGODisplay = ({tab}) => {
   if(tab==='Profile'){
     return (
       <div className='p-2 flex-grow'>
-        <h1>Welcome, {user.id}</h1>
+        <h1>Welcome, {user.name}</h1>
         <p>Here's an overview of reports you're managing</p>
         <div className='flex justify-around'>
           <MetricCard heading={'Total Incoming Cases'} metric={7} />
